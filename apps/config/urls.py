@@ -21,6 +21,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("product/", include("apps.product.urls", namespace="product")),
-    path("", lambda x: HttpResponseRedirect("/product/shopping-cart"), name="home"),
+    path(
+        "shopping-cart/", include("apps.shopping_cart.urls", namespace="shopping-cart")
+    ),
+    path(
+        "", lambda x: HttpResponseRedirect("/shopping-cart/shopping-cart"), name="home"
+    ),
 ]
