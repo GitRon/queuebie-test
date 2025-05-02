@@ -8,7 +8,7 @@ from apps.shopping_cart.models import ShoppingCart
 class ShoppingCartService:
     cart: ShoppingCart
 
-    def __init__(self, cart: ShoppingCart):
+    def __init__(self, *, cart: ShoppingCart):
         super().__init__()
 
         self.cart = cart
