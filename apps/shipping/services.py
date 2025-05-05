@@ -9,5 +9,5 @@ class DeliveryNoteService:
         return DeliveryNote.objects.create(
             shipping_type=shipping_type,
             order=order,
-            shipping_price=quantity,
+            shipping_price=quantity * 3,
         )

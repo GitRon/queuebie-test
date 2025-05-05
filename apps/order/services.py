@@ -25,7 +25,7 @@ class OrderService:
         shipping_type = self.order.shipping_type
         DeliveryNoteService().process(
             shipping_type=shipping_type,
-            quantity=self.order.products.all().count() * 3,
+            quantity=self.order.products.all().count(),
             order=self.order,
         )
 
