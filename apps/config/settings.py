@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "queuebie",
     # Local apps
     "apps.config",
+    "apps.order",
     "apps.payment",
     "apps.product",
     "apps.shipping",

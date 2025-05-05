@@ -10,7 +10,8 @@ class ShippingType(models.Model):
 
 class DeliveryNote(models.Model):
     shipping_type = models.ForeignKey(ShippingType, on_delete=models.CASCADE)
-    cart = models.ForeignKey("shopping_cart.ShoppingCart", on_delete=models.CASCADE)
+    order = models.ForeignKey("order.Order", on_delete=models.CASCADE)
+    shipping_price = models.PositiveSmallIntegerField()
 
     def __str__(self) -> str:
         return f"#{self.id}"

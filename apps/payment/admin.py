@@ -7,4 +7,4 @@ admin.site.register(PaymentMethod)
 
 @admin.register(PaymentTransaction)
 class PaymentTransactionAdmin(admin.ModelAdmin):
-    list_display = ("cart", "amount", "payment_method")
+    list_display = ("order", "amount", "payment_method")

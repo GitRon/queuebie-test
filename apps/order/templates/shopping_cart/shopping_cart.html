@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="grid grid-cols-2 gap-4">
+        <div class="bg-gray-100 p-4">
+            <h3 class="font-bold">Products</h3>
+            <ul>
+                {% for product in object.products.all %}
+                    <li>{{ product }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="bg-gray-100 p-4">
+            <div><span class="italic">Shipping</span>: {{ object.shipping_type }}</div>
+            <div><span class="italic">Payment</span>: {{ object.payment_method }}</div>
+        </div>
+    </div>
+    <div class="mt-4">
+        <a hx-post="{% url "shopping-cart:shopping-cart-buy-imperative-view" object.id %}"
+           hx-target="body"
+           hx-push-url="true"
+           class="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white text-lg font-semibold rounded-2xl shadow-md transition-all duration-200 ease-in-out cursor-pointer">
+            Buy now
+        </a>
+    </div>
+{% endblock content %}

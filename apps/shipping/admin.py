@@ -7,4 +7,4 @@ admin.site.register(ShippingType)
 
 @admin.register(DeliveryNote)
 class DeliveryNoteAdmin(admin.ModelAdmin):
-    list_display = ("cart", "shipping_type")
+    list_display = ("order", "shipping_type")

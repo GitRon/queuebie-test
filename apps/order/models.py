@@ -5,7 +5,7 @@ from apps.product.models import Product
 from apps.shipping.models import ShippingType
 
 
-class ShoppingCart(models.Model):
+class Order(models.Model):
     class StatusChoices(models.IntegerChoices):
         PENDING = 1, "Pending"
         SUCCESS = 2, "Bought"
