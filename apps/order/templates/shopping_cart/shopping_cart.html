@@ -16,11 +16,17 @@
         </div>
     </div>
     <div class="mt-4">
-        <a hx-post="{% url "shopping-cart:shopping-cart-buy-imperative-view" object.id %}"
+        <a hx-post="{% url "shopping-cart:shopping-cart-buy-imperative-view" %}"
            hx-target="body"
            hx-push-url="true"
            class="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white text-lg font-semibold rounded-2xl shadow-md transition-all duration-200 ease-in-out cursor-pointer">
-            Buy now
+            Buy now (imperative programming)
+        </a>
+        <a hx-post="{% url "shopping-cart:shopping-cart-buy-queuebie-view" %}"
+           hx-target="body"
+           hx-push-url="true"
+           class="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white text-lg font-semibold rounded-2xl shadow-md transition-all duration-200 ease-in-out cursor-pointer">
+            Buy now (Queuebie)
         </a>
     </div>
 {% endblock content %}

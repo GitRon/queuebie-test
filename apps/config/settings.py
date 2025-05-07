@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "queuebie",
     # Local apps
     "apps.config",
+    "apps.logging",
     "apps.order",
     "apps.payment",
     "apps.product",
@@ -132,6 +133,24 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+    },
+}
 
 # Queuebie
 QUEUEBIE_APP_BASE_PATH = BASE_DIR / "apps"

@@ -2,10 +2,12 @@ import logging
 import random
 from logging import Logger
 
+from django.db.models import QuerySet, Sum
+
 from apps.order.models import Order
 from apps.payment.exceptions import PaymentTransactionException
 from apps.payment.models import PaymentTransaction
-from apps.product.services import ProductPricingService
+from apps.product.models import Product
 from apps.shipping.models import DeliveryNote
 
 
@@ -13,17 +15,17 @@ class OrderService:
     order: Order
     logger: Logger
 
-    def __init__(self, *, order: Order) -> None:
+    def __init__(self, *, products: QuerySet[Product]) -> None:
         super().__init__()
 
-        self.order = order
+        self.order = Order.objects.create(
+            products=products,
+        )
         self.logger = logging.getLogger("order")
 
     def process(self) -> None:
         # Calculate price
-        total_price = ProductPricingService().process(
-            products=self.order.products.all()
-        )
+        total_price = self.order.products.aggregate(total=Sum("price"))["total"]
         self.logger.info(f"Total price: {total_price}")
 
         # Create payment transaction
