@@ -6,7 +6,7 @@ from django.db.models import QuerySet, Sum
 
 from apps.order.models import Order
 from apps.payment.exceptions import PaymentTransactionException
-from apps.payment.models import PaymentTransaction
+from apps.payment.models import PaymentTransaction, PaymentMethod
 from apps.product.models import Product
 from apps.shipping.models import DeliveryNote
 
@@ -15,11 +15,14 @@ class OrderService:
     order: Order
     logger: Logger
 
-    def __init__(self, *, products: QuerySet[Product]) -> None:
+    def __init__(
+        self, *, payment_method: PaymentMethod, products: QuerySet[Product]
+    ) -> None:
         super().__init__()
 
         self.order = Order.objects.create(
             products=products,
+            payment_method=payment_method,
         )
         self.logger = logging.getLogger("order")
 
@@ -57,7 +60,7 @@ class OrderService:
                 shipping_type=self.order.shipping_type,
                 order=self.order,
                 # Shipping price is a fixed rate for the truck to deliver the products
-                shipping_price=DeliveryNote.SHIPPING_COST,
+                shipping_price=DeliveryNote.FREIGHT_SHIPPING_COST,
             )
             self.logger.info("Order delivery note for freight forwarding created.")
         elif regular_products.exists():

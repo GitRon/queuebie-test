@@ -19,3 +19,10 @@ def handle_log_order_cancelled(*, context: OrderCancelled) -> Command:
     return CreateLogEntry(
         message=f"Order #{context.order.id} was cancelled", level=logging.WARNING
     )
+
+
+@message_registry.register_event(event=OrderCancelled)
+def handle_log_order_finished(*, context: OrderCancelled) -> Command:
+    return CreateLogEntry(
+        message=f"Order #{context.order.id} finished", level=logging.WARNING
+    )

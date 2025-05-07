@@ -18,3 +18,8 @@ class OrderCancelled(Event):
 @dataclass(kw_only=True)
 class OrderConfirmed(Event):
     order: Order
+
+
+@dataclass(kw_only=True)
+class OrderFinished(Event):
+    order: Order

@@ -1,16 +1,14 @@
 from django.db import models
 
 
-class ShippingType(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self) -> str:
-        return self.name
-
-
 class DeliveryNote(models.Model):
-    SHIPPING_COST = 249
-    shipping_type = models.ForeignKey(ShippingType, on_delete=models.CASCADE)
+    class ShippingTypeChoices(models.IntegerChoices):
+        POSTAL = 1, "Postal service"
+        FREIGHT = 2, "Freight forwarding"
+
+    FREIGHT_SHIPPING_COST = 249
+
+    shipping_type = models.PositiveSmallIntegerField(choices=ShippingTypeChoices)
     order = models.ForeignKey("order.Order", on_delete=models.CASCADE)
     shipping_price = models.PositiveSmallIntegerField()
 

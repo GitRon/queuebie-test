@@ -2,7 +2,6 @@ from django.db import models
 
 from apps.payment.models import PaymentMethod
 from apps.product.models import Product
-from apps.shipping.models import ShippingType
 
 
 class Order(models.Model):
@@ -15,9 +14,6 @@ class Order(models.Model):
     products = models.ManyToManyField(Product, blank=True)
     payment_method = models.ForeignKey(
         PaymentMethod, blank=True, null=True, on_delete=models.CASCADE
-    )
-    shipping_type = models.ForeignKey(
-        ShippingType, blank=True, null=True, on_delete=models.CASCADE
     )
     status = models.PositiveSmallIntegerField(
         choices=StatusChoices.choices, default=StatusChoices.PENDING

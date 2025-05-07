@@ -1,8 +1,11 @@
 from django.contrib import admin
 
-from .models import ShippingType, DeliveryNote
+from .models import DeliveryNote
 
-admin.site.register(ShippingType)
+
+class DeliveryNoteInline(admin.StackedInline):
+    extra = 0
+    model = DeliveryNote
 
 
 @admin.register(DeliveryNote)

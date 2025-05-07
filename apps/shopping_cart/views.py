@@ -5,6 +5,7 @@ from queuebie.runner import handle_message
 from apps.order.messages.commands.order import CreateOrder
 from apps.order.models import Order
 from apps.order.services import OrderService
+from apps.payment.models import PaymentMethod
 from apps.product.models import Product
 
 
@@ -31,7 +32,10 @@ def buy_cart_via_queuebie(request) -> HttpResponse:  # noqa: PBR001
     # Start queue and process messages
     handle_message(
         messages=[
-            CreateOrder(products=Product.objects.all()),
+            CreateOrder(
+                products=Product.objects.all(),
+                payment_method=PaymentMethod.objects.all().first(),
+            ),
         ]
     )
 
