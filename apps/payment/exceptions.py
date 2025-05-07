@@ -1,0 +1,2 @@
+class PaymentTransactionException(RuntimeError):
+    pass

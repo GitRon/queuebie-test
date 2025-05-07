@@ -9,6 +9,7 @@ class ShippingType(models.Model):
 
 
 class DeliveryNote(models.Model):
+    SHIPPING_COST = 249
     shipping_type = models.ForeignKey(ShippingType, on_delete=models.CASCADE)
     order = models.ForeignKey("order.Order", on_delete=models.CASCADE)
     shipping_price = models.PositiveSmallIntegerField()

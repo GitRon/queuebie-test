@@ -8,8 +8,9 @@ from apps.shipping.models import ShippingType
 class Order(models.Model):
     class StatusChoices(models.IntegerChoices):
         PENDING = 1, "Pending"
-        SUCCESS = 2, "Bought"
-        EXPIRED = 3, "Expired"
+        CONFIRMED = 2, "Confirmed"
+        SUCCESS = 3, "Success"
+        CANCELLED = 4, "Cancelled"
 
     products = models.ManyToManyField(Product, blank=True)
     payment_method = models.ForeignKey(
