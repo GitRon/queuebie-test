@@ -1,6 +1,6 @@
 # Demo project for django-queuebie
 
-Test showcase project why to use [django-queuebie](https://pypi.org/project/django-queuebie/).
+https://pypi.org/project/django-queuebie/
 
 ## Architecture
 
