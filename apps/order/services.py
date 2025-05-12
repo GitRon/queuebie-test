@@ -57,7 +57,7 @@ class OrderService:
 
         if bulky_products.exists():
             DeliveryNote.objects.create(
-                shipping_type=self.order.shipping_type,
+                shipping_type=DeliveryNote.ShippingTypeChoices.FREIGHT,
                 order=self.order,
                 # Shipping price is a fixed rate for the truck to deliver the products
                 shipping_price=DeliveryNote.FREIGHT_SHIPPING_COST,
@@ -65,7 +65,7 @@ class OrderService:
             self.logger.info("Order delivery note for freight forwarding created.")
         elif regular_products.exists():
             DeliveryNote.objects.create(
-                shipping_type=self.order.shipping_type,
+                shipping_type=DeliveryNote.ShippingTypeChoices.POSTAL,
                 order=self.order,
                 # Shipping price is determined by the number of shipped items
                 shipping_price=regular_products.count() * 3,
