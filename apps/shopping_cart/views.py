@@ -33,7 +33,9 @@ def buy_cart_via_queuebie(request) -> HttpResponse:  # noqa: PBR001
     handle_message(
         messages=[
             CreateOrder(
+                # Hack to avoid having to implement a product selection in the frontend
                 products=Product.objects.all(),
+                # Hack to avoid having to implement a payment selection in the frontend
                 payment_method=PaymentMethod.objects.all().first(),
             ),
         ]
