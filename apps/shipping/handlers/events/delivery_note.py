@@ -7,7 +7,7 @@ from apps.shipping.models import DeliveryNote
 
 
 @message_registry.register_event(event=ShippingTypeDecided)
-def handle_shipping_type_decided(*, context: ShippingTypeDecided) -> Command | None:
+def handle_shipping_type_decided(*, context: ShippingTypeDecided) -> Command:
     if context.shipping_type == DeliveryNote.ShippingTypeChoices.FREIGHT:
         return CreateDeliveryNote(
             shipping_type=DeliveryNote.ShippingTypeChoices.FREIGHT,
@@ -22,4 +22,4 @@ def handle_shipping_type_decided(*, context: ShippingTypeDecided) -> Command | N
             # Shipping price is determined by the number of shipped items
             shipping_price=context.no_of_products * 3,
         )
-    return None
+    raise RuntimeError("Unknown shipping type")
